@@ -6,515 +6,311 @@
 <title>G80 M3 Microfiber Inventory Plan</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e8e8e8; line-height: 1.6; }
-  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 40px 24px; text-align: center; border-bottom: 3px solid #00d4ff; }
-  .header h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 8px; }
-  .header .subtitle { font-size: 0.9rem; color: #8bb8cc; }
-  .header .subtitle a { color: #00d4ff; text-decoration: none; }
-  .header .subtitle a:hover { text-decoration: underline; }
-  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
-  .section { background: #111; border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: 1px solid #222; }
-  .section-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #181818; border-bottom: 1px solid #222; }
-  .section-icon { font-size: 1.2rem; }
-  .section-title h2 { font-size: 1rem; font-weight: 700; color: #fff; }
-  .section-title p { font-size: 0.8rem; color: #666; margin-top: 1px; }
-  .category { padding: 16px 20px; border-bottom: 1px solid #1a1a1a; }
-  .category:last-child { border-bottom: none; }
-  .cat-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
-  .cat-name { font-size: 0.95rem; font-weight: 700; color: #fff; }
-  .cat-step { font-size: 0.75rem; background: #1e2a3a; color: #00d4ff; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-top: 2px; display: inline-block; }
-  .badge { font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
-  .badge-bugs { background: #ff4444; color: #fff; }
-  .badge-tar { background: #333; color: #fff; }
-  .badge-wheels { background: #d4a017; color: #000; }
-  .badge-jambs { background: #6b21a8; color: #fff; }
-  .badge-reload { background: #0369a1; color: #fff; }
-  .badge-qd { background: #0f766e; color: #fff; }
-  .badge-glass { background: #d1d5db; color: #000; }
-  .badge-dry { background: #c2410c; color: #fff; }
-  .badge-exhaust { background: #27272a; color: #fff; }
-  .product { background: #161616; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
-  .product.alt { border-left: 3px solid #555; background: #141414; }
-  .product-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-  .product a { color: #60a5fa; text-decoration: none; font-size: 0.88rem; font-weight: 600; line-height: 1.4; }
-  .product a:hover { color: #93c5fd; text-decoration: underline; }
-  .product-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
-  .qty { font-size: 0.78rem; color: #aaa; }
-  .price { font-size: 0.88rem; font-weight: 700; color: #4ade80; white-space: nowrap; }
-  .product-note { font-size: 0.78rem; color: #888; margin-top: 6px; line-height: 1.5; }
-  .alt-label { font-size: 0.7rem; color: #888; font-style: italic; margin-bottom: 6px; }
-  .cat-info { font-size: 0.82rem; color: #777; margin-bottom: 10px; line-height: 1.5; }
-  .table-wrap { overflow-x: auto; margin-top: 8px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-  th { background: #1a1a1a; color: #aaa; font-weight: 600; text-align: left; padding: 10px 12px; border-bottom: 1px solid #333; white-space: nowrap; }
-  td { padding: 9px 12px; border-bottom: 1px solid #1a1a1a; color: #ccc; vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #141414; }
-  td a { color: #60a5fa; text-decoration: none; font-size: 0.8rem; }
-  td a:hover { color: #93c5fd; text-decoration: underline; }
-  .td-price { color: #4ade80; font-weight: 700; white-space: nowrap; }
-  .td-label { font-family: monospace; font-size: 0.75rem; background: #1a1a1a; padding: 2px 5px; border-radius: 3px; white-space: nowrap; }
-  .note-box { background: #0d1f0d; border: 1px solid #1a3d1a; border-radius: 8px; padding: 14px 16px; margin-top: 6px; font-size: 0.82rem; color: #86efac; line-height: 1.6; }
-  .note-box strong { color: #4ade80; }
-  .pricing-note { text-align: center; font-size: 0.75rem; color: #555; padding: 16px; }
-  .pricing-note a { color: #444; }
-  @media (max-width: 600px) {
-    .cat-header { flex-direction: column; gap: 6px; }
-    th, td { padding: 8px; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #1a1a1a; background: #fff; padding: 30px 40px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 800; color: #0d0d0d; margin-bottom: 4px; }
+  .subtitle { font-size: 11px; color: #555; margin-bottom: 24px; border-bottom: 2px solid #1a1a1a; padding-bottom: 10px; }
+  .subtitle a { color: #1a5fb4; }
+  h2 { font-size: 13px; font-weight: 700; color: #fff; padding: 7px 12px; margin: 20px 0 8px 0; border-radius: 4px; }
+  h2.red    { background: #c0392b; }
+  h2.yellow { background: #b7850a; }
+  h2.green  { background: #27ae60; }
+  h2.blue   { background: #2980b9; }
+  h2.silver { background: #7f8c8d; }
+  h2.orange { background: #d35400; }
+  h2.dark   { background: #2c3e50; }
+  h2.black  { background: #1a1a1a; }
+  h3 { font-size: 12px; font-weight: 700; color: #1a1a1a; margin: 10px 0 5px 0; }
+  p { line-height: 1.6; margin-bottom: 5px; }
+  ul { padding-left: 18px; margin-bottom: 8px; }
+  li { line-height: 1.6; margin-bottom: 3px; }
+  a { color: #1a5fb4; text-decoration: underline; }
+  a:hover { color: #0d3d8a; }
+  .section { margin-bottom: 12px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 5px; padding: 10px 14px; page-break-inside: avoid; }
+  .badge { display: inline-block; background: #eee; border: 1px solid #ccc; border-radius: 3px; padding: 1px 7px; font-size: 10px; font-weight: 700; color: #333; margin-left: 6px; font-family: monospace; letter-spacing: 0.3px; }
+  .qty { font-weight: 700; color: #c0392b; }
+  .price { font-weight: 700; color: #1a7a3a; }
+  .note { background: #fff8e1; border-left: 4px solid #f59e0b; padding: 8px 12px; margin: 8px 0 12px 0; border-radius: 0 4px 4px 0; font-size: 11px; line-height: 1.55; }
+  .note strong { color: #92400e; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; }
+  thead tr { background: #1a1a1a; color: #fff; }
+  thead th { padding: 7px 9px; text-align: left; font-weight: 700; }
+  tbody tr:nth-child(even) { background: #f5f5f5; }
+  tbody tr:nth-child(odd)  { background: #fff; }
+  tbody tr:hover { background: #eaf0fb; }
+  td { padding: 6px 9px; vertical-align: middle; border-bottom: 1px solid #ddd; }
+  td.price-cell { font-weight: 700; color: #1a7a3a; white-space: nowrap; }
+  td a { font-size: 11px; }
+  .footer { margin-top: 20px; font-size: 9px; color: #999; border-top: 1px solid #eee; padding-top: 8px; }
+  .pricing-note { font-size: 10px; color: #777; font-style: italic; margin-top: 6px; }
+  @media print {
+    body { padding: 15px 20px; font-size: 10px; }
+    h2 { font-size: 11px; padding: 5px 9px; }
+    .section { margin-bottom: 8px; padding: 7px 10px; }
+    a { color: #1a5fb4 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h2 { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .note { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>G80 M3 — Microfiber Inventory Plan</h1>
-  <p class="subtitle">Isle of Man Green BMW M3 G80 &middot; Ceramic Coated &middot; Cross-referenced from the <a href="https://andylambert05-ship-it.github.io/g80-wash-plan/" target="_blank">21-Step Bi-Weekly Wash Plan v2.0</a></p>
-</div>
 
-<div class="container">
+<h1>G80 M3 &mdash; Microfiber Inventory Plan</h1>
+<p class="subtitle">Isle of Man Green BMW M3 G80 &nbsp;&middot;&nbsp; Ceramic Coated &nbsp;&middot;&nbsp; Cross-referenced from the <a href="https://andylambert05-ship-it.github.io/g80-wash-plan/">21-Step Bi-Weekly Wash Plan v2.0</a></p>
 
-<!-- DIRTY JOB TOWELS -->
+<!-- ===================== DIRTY JOBS ===================== -->
+<h2 class="red">&#128534; DEDICATED &ldquo;DIRTY JOB&rdquo; TOWELS &mdash; Keep Separate Forever</h2>
+
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">😖</div>
-    <div class="section-title">
-      <h2>DEDICATED "DIRTY JOB" TOWELS — Keep Separate Forever</h2>
-      <p>Bug removal &middot; Tar removal &middot; Wheel overflow</p>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">1. Bug Removal Towels</div>
-        <div class="cat-step">Step 2 — CarPro Bug Out</div>
-      </div>
-      <span class="badge badge-bugs">BUGS</span>
-    </div>
-    <div class="cat-info">Agitate Bug Out on dry front bumper, hood edge, lower windshield, and mirrors. Treat as consumables — heavy contamination, wash or discard separately.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" 350gsm (10-pack)</a>
-        <span class="price">$15.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 4–6 towels &middot; Color code: Red / Orange</span>
-      </div>
-      <div class="product-note">Low pile, affordable, expendable. Zero risk of cross-contaminating paint or coating towels.</div>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">2. Tar Removal Towels</div>
-        <div class="cat-step">Step 3 — CarPro Tar X</div>
-      </div>
-      <span class="badge badge-tar">TAR ONLY</span>
-    </div>
-    <div class="cat-info">Wipe Tar X residue off lower rockers, rear bumper, door bottoms on dry surface. Tar stains permanently — treat as fully dedicated consumables.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" 350gsm (10-pack)</a>
-        <span class="price">$15.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 4–6 towels &middot; Color code: Black (visually distinct)</span>
-      </div>
-      <div class="product-note">Same budget workhorse — retire frequently once tarred.</div>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">3. Wheel Face / Overflow Wipe Towels</div>
-        <div class="cat-step">Steps 4–6 — Koch Chemie MWC</div>
-      </div>
-      <span class="badge badge-wheels">WHEELS</span>
-    </div>
-    <div class="cat-info">Wipe wheel faces and any iron decon chemical overflow after MWC agitation with EZ Detail brushes and Autofiber Barrel Blade. Never near paint.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" 350gsm (10-pack)</a>
-        <span class="price">$15.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 4–6 towels &middot; Color code: Yellow</span>
-      </div>
-    </div>
-  </div>
+  <h3>1. Bug Removal Towels &mdash; Step 2 (CarPro Bug Out) <span class="badge">BUGS</span></h3>
+  <p><strong>Use:</strong> Agitate Bug Out on dry front bumper, hood edge, lower windshield, and mirrors. Treat as consumables &mdash; heavy contamination, wash or discard separately.</p>
+  <ul>
+    <li><strong>Product:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo; 350gsm</a> &nbsp;&middot;&nbsp; <span class="price">$15.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">4&ndash;6 towels</span> &nbsp;&middot;&nbsp; Color code: <strong>Red / Orange</strong></li>
+    <li><strong>Why:</strong> Low pile, affordable, expendable. Zero risk of cross-contaminating paint or coating towels.</li>
+  </ul>
 </div>
 
-<!-- DOOR JAMB -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">🟢</div>
-    <div class="section-title">
-      <h2>DOOR JAMB &amp; APC TOWELS</h2>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">4. Door Jamb Wipe-Down Towels</div>
-        <div class="cat-step">Step 8 — AllClean / MultiX</div>
-      </div>
-      <span class="badge badge-jambs">JAMBS</span>
-    </div>
-    <div class="cat-info">After leaf-blower blast, wipe flat surfaces of door jambs post-APC agitation. Touch APC residue — keep separate from paint towels.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm edgeless (10-pack)</a>
-        <span class="price">$17.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 4 towels &middot; Color code: Purple</span>
-      </div>
-      <div class="product-note">Primary: smaller size ideal for tight jamb spaces</div>
-    </div>
-    <div class="product alt">
-      <div class="alt-label">Alternative</div>
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" (10-pack)</a>
-        <span class="price">$15.00</span>
-      </div>
-    </div>
-  </div>
+  <h3>2. Tar Removal Towels &mdash; Step 3 (CarPro Tar X) <span class="badge">TAR ONLY</span></h3>
+  <p><strong>Use:</strong> Wipe Tar X residue off lower rockers, rear bumper, door bottoms on dry surface. Tar stains permanently &mdash; treat as fully dedicated consumables.</p>
+  <ul>
+    <li><strong>Product:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo; 350gsm</a> &nbsp;&middot;&nbsp; <span class="price">$15.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">4&ndash;6 towels</span> &nbsp;&middot;&nbsp; Color code: <strong>Black</strong> (visually distinct from everything else)</li>
+    <li><strong>Why:</strong> Same budget workhorse &mdash; retire frequently once tarred.</li>
+  </ul>
 </div>
 
-<!-- PAINT CONTACT -->
+<!-- ===================== WHEELS ===================== -->
+<h2 class="yellow">&#128993; WHEEL &amp; TIRE TOWELS &mdash; Keep Separate from Paint</h2>
+
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">🔵</div>
-    <div class="section-title">
-      <h2>PAINT CONTACT TOWELS — Most Critical Category</h2>
-      <p>Zero towel contact on paint after rinsing — blower drying is mandatory. Paint contact ONLY at Steps 15 &amp; 21.</p>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">5. Reload 2.0 — Application / Spread Towels</div>
-        <div class="cat-step">Step 15 — Reload 2.0</div>
-      </div>
-      <span class="badge badge-reload">RELOAD – SPREAD</span>
-    </div>
-    <div class="cat-info">3–4 sprays of Reload 2.0 onto towel, spread evenly panel-by-panel, wait 30–60 sec to flash. Low-pile 70/30 for even spread without dragging on ION Green metallic.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/korean-quadrant-wipe-plush-microfiber-coating-leveling-towel-16-in-x-16-in-350-gsm-10-pack" target="_blank">Autofiber Korean Quadrant Wipe — 16"x16" 350gsm edgeless (10-pack)</a>
-        <span class="price">$60.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 6–8 towels per wash session</span>
-      </div>
-      <div class="product-note">Coating-specific; quadrant fold gives 4 clean faces per towel, designed for ceramic leveling</div>
-    </div>
-    <div class="product alt">
-      <div class="alt-label">Alternative</div>
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/korean-pearl-edgeless-detailing-towels-16-in-x-16-in-300-gsm-10-pack-bulk-bundle" target="_blank">Autofiber Korean Pearl 300 — 16"x16" edgeless (10-pack)</a>
-        <span class="price">$34.95</span>
-      </div>
-      <div class="product-note">Ultra-fine pearl weave, slightly lower pile; made in S. Korea</div>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">6. Reload 2.0 — Buff-Off Towels</div>
-        <div class="cat-step">Step 15 — Reload 2.0</div>
-      </div>
-      <span class="badge badge-reload">RELOAD – BUFF OFF</span>
-    </div>
-    <div class="cat-info">Second clean dry towel to buff off the hazy Reload flash (after 30–60 sec). Needs a firm base that resists collapsing during buffing, ultra-fine pile for zero marring.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm edgeless ZeroEdge (10-pack)</a>
-        <span class="price">$17.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 6–8 towels per session (match count to spread towels)</span>
-      </div>
-      <div class="product-note">Stiff base resists collapse, 70/30 ultra-fine pile UV-tested for zero micro-marring</div>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">7. QD / Spot Detailer Final Pass</div>
-        <div class="cat-step">Step 21 — QD Final Inspection</div>
-      </div>
-      <span class="badge badge-qd">QD ONLY</span>
-    </div>
-    <div class="cat-info">Final inspection walk-around in direct sunlight at raking angle, spot-correcting any water spots, missed panels, or glass haze on cool, clean, dry paint.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm edgeless (10-pack)</a>
-        <span class="price">$17.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 2–3 towels — store in a clean sealed bag between washes</span>
-      </div>
-    </div>
-  </div>
+  <h3>3. Wheel Face / Overflow Wipe Towels &mdash; Steps 4&ndash;6 (Koch Chemie MWC) <span class="badge">WHEELS</span></h3>
+  <p><strong>Use:</strong> Wipe wheel faces and any iron decon chemical overflow after MWC agitation with EZ Detail brushes and Autofiber Barrel Blade. <em>Never</em> near paint.</p>
+  <ul>
+    <li><strong>Product:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo; 350gsm</a> &nbsp;&middot;&nbsp; <span class="price">$15.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">4&ndash;6 towels</span> &nbsp;&middot;&nbsp; Color code: <strong>Yellow</strong></li>
+  </ul>
 </div>
 
-<!-- GLASS -->
+<!-- ===================== JAMBS ===================== -->
+<h2 class="green">&#128994; DOOR JAMB &amp; APC TOWELS</h2>
+
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">⚪</div>
-    <div class="section-title">
-      <h2>GLASS TOWELS — Interior &amp; Exterior Must Be Kept Separate</h2>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">8. Exterior Glass Towels</div>
-        <div class="cat-step">Step 17 — BH Trace-Less / Autofinesse Crystal</div>
-      </div>
-      <span class="badge badge-glass">GLASS – EXT</span>
-    </div>
-    <div class="cat-info">Clean exterior windshield, rear glass, side windows. Waffle-weave for the cleaning wipe pass; dry or suede side for streak-free buff.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/no-streak-freak-microfiber-waffle-weave-glass-towel-with-microedge-16-in-x-16-in" target="_blank">Autofiber No Streak Freak — 16"x16" 400gsm Waffle Weave MicroEdge (3-pack)</a>
-        <span class="price">$15.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 4–6 towels &middot; NEVER cross-use with interior glass towels</span>
-      </div>
-      <div class="product-note">Industry-proven, no polyester stitching to streak</div>
-    </div>
-    <div class="product alt">
-      <div class="alt-label">Alternative (2-in-1 flip design)</div>
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/flip-gpt-glass-perfect-towel-8-5-in-x-8-5-in-1400-gsm-3-pack" target="_blank">Autofiber Flip GPT — 8.5"x8.5" 1400gsm (3-pack)</a>
-        <span class="price">$21.00</span>
-      </div>
-      <div class="product-note">Long pile scrubs, flip to short pile for streak-free buff; 4 clean sections per towel</div>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">9. Interior Glass Towels</div>
-        <div class="cat-step">Step 18 — Invisible Glass Reach &amp; Clean Tool</div>
-      </div>
-      <span class="badge badge-glass">GLASS – INT</span>
-    </div>
-    <div class="cat-info">Spray onto MF head of Reach &amp; Clean Tool (not directly on glass). First pass damp to clean; swap to fresh face for dry buff pass. Separate cloths for side windows.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/flip-gpt-glass-perfect-towel-8-5-in-x-8-5-in-1400-gsm-3-pack" target="_blank">Autofiber Flip GPT — 8.5"x8.5" 1400gsm (3-pack)</a>
-        <span class="price">$21.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 4–6 towels &middot; NEVER cross-use with exterior glass towels</span>
-      </div>
-      <div class="product-note">Compact size fits the Reach &amp; Clean tool head perfectly; flip design always gives a fresh dry buffing face</div>
-    </div>
-  </div>
+  <h3>4. Door Jamb Wipe-Down Towels &mdash; Step 8 (AllClean / MultiX) <span class="badge">JAMBS</span></h3>
+  <p><strong>Use:</strong> After leaf-blower blast, wipe flat surfaces of door jambs post-APC agitation. Touch APC residue &mdash; keep separate from paint towels.</p>
+  <ul>
+    <li><strong>Primary:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm (edgeless)</a> &nbsp;&middot;&nbsp; <span class="price">$17.00 / 10-pack</span></li>
+    <li><strong>Alternative:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo;</a> &nbsp;&middot;&nbsp; <span class="price">$15.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">4 towels</span> &nbsp;&middot;&nbsp; Color code: <strong>Purple</strong></li>
+  </ul>
 </div>
 
-<!-- DRYING -->
+<!-- ===================== PAINT ===================== -->
+<h2 class="blue">&#128309; PAINT CONTACT TOWELS &mdash; Most Critical Category</h2>
+<div class="note"><strong>Key Rule:</strong> Per the wash plan, paint towel contact occurs <em>only</em> at Step 15 (Reload 2.0 application &amp; buff-off) and Step 21 (QD final pass). Zero towel contact on paint after rinsing &mdash; blower drying is mandatory. These towels must be edgeless, lint-free, and ultrasoft.</div>
+
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">🟠</div>
-    <div class="section-title">
-      <h2>DRYING TOWELS — Trim, Mirrors &amp; Non-Paint Surfaces Only</h2>
-      <p>Zero towel contact on paint after rinsing — all paint drying is touchless via leaf blower</p>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">10. Non-Paint Drying Towels</div>
-        <div class="cat-step">Step 14 — Post-Rinse Overflow</div>
-      </div>
-      <span class="badge badge-dry">DRY – TRIM ONLY</span>
-    </div>
-    <div class="cat-info">Chase residual water from mirror housings, badge gaps, exhaust tips, panel edges — only after leaf blower. Never drag across clear coat.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/amphibian-microfiber-drying-towel-20-in-x-30-in-1100gsm-1-pack" target="_blank">Autofiber Amphibian — 20"x30" 1100gsm Twist/Plush Hidden Edge (1-pack)</a>
-        <span class="price">$20.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 1–2 towels</span>
-      </div>
-      <div class="product-note">1100gsm absorbency, hidden internal edge</div>
-    </div>
-    <div class="product alt">
-      <div class="alt-label">Alternative</div>
-      <div class="product-top">
-        <a href="https://adamspolishes.com/products/adam-s-great-white-microfiber-drying-towel" target="_blank">Adam's Great White Microfiber Drying Towel</a>
-        <span class="price">$17.99</span>
-      </div>
-      <div class="product-note">Waffle weave, highly rated for absorbent blotting</div>
-    </div>
-  </div>
+  <h3>5. Reload 2.0 &mdash; Application / Spread Towels &mdash; Step 15 <span class="badge">RELOAD &ndash; SPREAD</span></h3>
+  <p><strong>Use:</strong> 3&ndash;4 sprays of Reload 2.0 onto towel, spread evenly panel-by-panel, wait 30&ndash;60 sec to flash. Low-pile 70/30 for even spread without dragging on ION Green metallic.</p>
+  <ul>
+    <li><strong>Primary:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-korean-quadrant-wipe-plush-microfiber-coating-leveling-towel-16-in-x-16-in-350-gsm-120-case">Autofiber Korean Quadrant Wipe &mdash; 16&rdquo;x16&rdquo; 350gsm (edgeless, coating-specific)</a> &nbsp;&middot;&nbsp; <span class="price">$60.00 / 10-pack</span> &mdash; quadrant fold gives <strong>4 clean faces per towel</strong>, designed for ceramic leveling</li>
+    <li><strong>Alternative:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-casekorean-pearl-300-edgeless-detailing-towels-16-in-x-16-in-300-gsm-100-case">Autofiber Korean Pearl 300 &mdash; 16&rdquo;x16&rdquo; (edgeless, made in S. Korea)</a> &nbsp;&middot;&nbsp; <span class="price">$34.95 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">6&ndash;8 towels</span> per wash session (one per panel on a full G80 M3)</li>
+  </ul>
 </div>
 
-<!-- EXHAUST -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">⬛</div>
-    <div class="section-title">
-      <h2>EXHAUST TIP TOWELS</h2>
-    </div>
-  </div>
-
-  <div class="category">
-    <div class="cat-header">
-      <div>
-        <div class="cat-name">11. Exhaust Tip Cleaning</div>
-        <div class="cat-step">Step 16 — P21S Polishing Soap</div>
-      </div>
-      <span class="badge badge-exhaust">EXHAUST</span>
-    </div>
-    <div class="cat-info">Apply P21S Polishing Soap with circular motions on each exhaust tip to cut carbon soot and oxidation. These will go black — completely separate from all other towels.</div>
-    <div class="product">
-      <div class="product-top">
-        <a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm (10-pack)</a>
-        <span class="price">$17.00</span>
-      </div>
-      <div class="product-meta">
-        <span class="qty">Qty: 2–4 towels &middot; Color code: Dark / Black</span>
-      </div>
-      <div class="product-note">Stiff base ideal for the light scrubbing motion; cheap enough to replace when black</div>
-    </div>
-  </div>
+  <h3>6. Reload 2.0 &mdash; Buff-Off Towels &mdash; Step 15 <span class="badge">RELOAD &ndash; BUFF OFF</span></h3>
+  <p><strong>Use:</strong> Second clean dry towel to buff off the hazy Reload flash (after 30&ndash;60 sec). Needs a firm base that resists collapsing during buffing, ultra-fine pile for zero marring.</p>
+  <ul>
+    <li><strong>Primary:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm (edgeless, ZeroEdge)</a> &nbsp;&middot;&nbsp; <span class="price">$17.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">6&ndash;8 towels</span> per session (match count to spread towels)</li>
+  </ul>
 </div>
 
-<!-- SUMMARY TABLE -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-icon">📋</div>
-    <div class="section-title">
-      <h2>COMPLETE INVENTORY SUMMARY</h2>
-    </div>
-  </div>
-  <div class="table-wrap" style="padding: 16px 20px;">
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Towel Type</th>
-          <th>Recommended Product</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>Label</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Bug Removal</td>
-          <td><a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" 350gsm</a></td>
-          <td>4–6</td>
-          <td class="td-price">$15.00</td>
-          <td><span class="td-label">BUGS</span></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Tar Removal</td>
-          <td><a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" 350gsm</a></td>
-          <td>4–6</td>
-          <td class="td-price">$15.00</td>
-          <td><span class="td-label">TAR ONLY</span></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Wheel / Overflow</td>
-          <td><a href="https://www.autofiber.com/products/shop-rag-300" target="_blank">Autofiber Utility 350 — 16"x16" 350gsm</a></td>
-          <td>4–6</td>
-          <td class="td-price">$15.00</td>
-          <td><span class="td-label">WHEELS</span></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Door Jambs</td>
-          <td><a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm</a></td>
-          <td>4</td>
-          <td class="td-price">$17.00</td>
-          <td><span class="td-label">JAMBS</span></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Reload — Spread</td>
-          <td><a href="https://www.autofiber.com/products/korean-quadrant-wipe-plush-microfiber-coating-leveling-towel-16-in-x-16-in-350-gsm-10-pack" target="_blank">Autofiber Korean Quadrant Wipe — 16"x16" 350gsm</a></td>
-          <td>6–8</td>
-          <td class="td-price">$60.00</td>
-          <td><span class="td-label">RELOAD – SPREAD</span></td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>Reload — Buff Off</td>
-          <td><a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm</a></td>
-          <td>6–8</td>
-          <td class="td-price">$17.00</td>
-          <td><span class="td-label">RELOAD – BUFF OFF</span></td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>QD Final Pass</td>
-          <td><a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm</a></td>
-          <td>2–3</td>
-          <td class="td-price">$17.00</td>
-          <td><span class="td-label">QD ONLY</span></td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>Exterior Glass</td>
-          <td><a href="https://www.autofiber.com/products/no-streak-freak-microfiber-waffle-weave-glass-towel-with-microedge-16-in-x-16-in" target="_blank">Autofiber No Streak Freak — 16"x16" 400gsm Waffle</a></td>
-          <td>4–6</td>
-          <td class="td-price">$15.00</td>
-          <td><span class="td-label">GLASS – EXT</span></td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td>Interior Glass</td>
-          <td><a href="https://www.autofiber.com/products/flip-gpt-glass-perfect-towel-8-5-in-x-8-5-in-1400-gsm-3-pack" target="_blank">Autofiber Flip GPT — 8.5"x8.5" 1400gsm</a></td>
-          <td>4–6</td>
-          <td class="td-price">$21.00</td>
-          <td><span class="td-label">GLASS – INT</span></td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>Drying (Trim / Mirrors)</td>
-          <td><a href="https://www.autofiber.com/products/amphibian-microfiber-drying-towel-20-in-x-30-in-1100gsm-1-pack" target="_blank">Autofiber Amphibian — 20"x30" 1100gsm</a></td>
-          <td>1–2</td>
-          <td class="td-price">$20.00</td>
-          <td><span class="td-label">DRY – TRIM ONLY</span></td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>Exhaust Tips</td>
-          <td><a href="https://www.autofiber.com/products/mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-10-pack" target="_blank">Autofiber Mr. Everything Jr. — 12"x12" 390gsm</a></td>
-          <td>2–4</td>
-          <td class="td-price">$17.00</td>
-          <td><span class="td-label">EXHAUST</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-box" style="margin-top: 16px;">
-      <strong>Key reminders:</strong> Color-code every category — ION Green metallic on a ceramic-coated car means any cross-contamination is a potential paint damage event. The Mr. Everything Jr. 12"x12" is your highest-use towel (Reload buff-off, QD pass, jambs, exhaust) — start with a 10-pack. The Korean Quadrant Wipe is the star for Reload 2.0 spread — 4 clean faces per fold. Start with 10-packs and 3-packs across all categories before committing to case quantities.
-    </div>
-  </div>
+  <h3>7. QD / Spot Detailer Final Pass &mdash; Step 21 <span class="badge">QD ONLY</span></h3>
+  <p><strong>Use:</strong> Final inspection walk-around in direct sunlight at raking angle, spot-correcting any water spots, missed panels, or glass haze on cool, clean, dry paint.</p>
+  <ul>
+    <li><strong>Product:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm (edgeless)</a> &nbsp;&middot;&nbsp; <span class="price">$17.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">2&ndash;3 towels</span> &mdash; store in a clean sealed bag between washes</li>
+  </ul>
 </div>
 
-<p class="pricing-note">G80 M3 Wash Plan v2.0 &middot; Products sourced from <a href="https://www.autofiber.com" target="_blank">autofiber.com</a> &amp; <a href="https://adamspolishes.com" target="_blank">adamspolishes.com</a> &middot; Individual pack prices verified May 2026</p>
+<!-- ===================== GLASS ===================== -->
+<h2 class="silver">&#9898; GLASS TOWELS &mdash; Interior &amp; Exterior Must Be Kept Separate</h2>
 
+<div class="section">
+  <h3>8. Exterior Glass Towels &mdash; Step 17 (BH Trace-Less / Autofinesse Crystal) <span class="badge">GLASS &ndash; EXT</span></h3>
+  <p><strong>Use:</strong> Clean exterior windshield, rear glass, side windows. Waffle-weave for the cleaning wipe pass; dry or suede side for streak-free buff.</p>
+  <ul>
+    <li><strong>Primary:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-retail-packaging-no-streak-freak-microfiber-waffle-weave-glass-towel-16-in-x-16-in-400-gsm-24-3-packs">Autofiber No Streak Freak &mdash; 16&rdquo;x16&rdquo; 400gsm Waffle Weave (MicroEdge)</a> &nbsp;&middot;&nbsp; <span class="price">$15.00 / 3-pack</span></li>
+    <li><strong>Alternative (2-in-1):</strong> <a href="https://www.autofiber.com/collections/towels/products/flip-gpt-glass-perfect-towel-8-5-in-x-8-5-in-1400-gsm-3-pack">Autofiber Flip GPT &mdash; 8.5&rdquo;x8.5&rdquo; 1000gsm</a> &nbsp;&middot;&nbsp; <span class="price">$21.00 / 3-pack</span> &mdash; long pile scrubs, flip to short pile for streak-free buff; 4 clean sections per towel</li>
+    <li><strong>Qty:</strong> <span class="qty">4&ndash;6 towels</span> &nbsp;&middot;&nbsp; <strong>NEVER cross-use with interior glass towels</strong></li>
+  </ul>
 </div>
+
+<div class="section">
+  <h3>9. Interior Glass Towels &mdash; Step 18 (Invisible Glass Reach &amp; Clean Tool) <span class="badge">GLASS &ndash; INT</span></h3>
+  <p><strong>Use:</strong> Spray onto MF head of Reach &amp; Clean Tool (not directly on glass). First pass damp to clean; swap to fresh face for dry buff pass. Separate cloths for side windows.</p>
+  <ul>
+    <li><strong>Primary:</strong> <a href="https://www.autofiber.com/collections/towels/products/flip-gpt-glass-perfect-towel-8-5-in-x-8-5-in-1400-gsm-3-pack">Autofiber Flip GPT &mdash; 8.5&rdquo;x8.5&rdquo; 1000gsm</a> &nbsp;&middot;&nbsp; <span class="price">$21.00 / 3-pack</span> &mdash; compact size fits the Reach &amp; Clean tool head perfectly</li>
+    <li><strong>Qty:</strong> <span class="qty">4&ndash;6 towels</span> &nbsp;&middot;&nbsp; <strong>NEVER cross-use with exterior glass towels</strong></li>
+  </ul>
+</div>
+
+<!-- ===================== DRYING ===================== -->
+<h2 class="orange">&#128992; DRYING TOWELS &mdash; Trim, Mirrors &amp; Non-Paint Surfaces Only</h2>
+<div class="note"><strong>Reminder:</strong> The wash plan mandates <strong>zero towel contact on paint after rinsing</strong> &mdash; all paint drying is touchless via leaf blower. These towels only touch mirror housings, badge gaps, trim, exhaust outlets, and jamb areas <em>after</em> the blower has done its work.</div>
+
+<div class="section">
+  <h3>10. Non-Paint Drying Towels &mdash; Step 14 Overflow <span class="badge">DRY &ndash; TRIM ONLY</span></h3>
+  <p><strong>Use:</strong> Chase residual water from mirror housings, badge gaps, exhaust tips, panel edges &mdash; only after leaf blower. Never drag across clear coat.</p>
+  <ul>
+    <li><strong>Primary (Autofiber):</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-amphibian-drying-towel-1100gsm-20x30-30-case">Autofiber Amphibian &mdash; 20&rdquo;x30&rdquo; 1100gsm (Twist/Plush, Hidden Edge)</a> &nbsp;&middot;&nbsp; <span class="price">$20.00 / 1-pack</span></li>
+    <li><strong>Alternative (Adams):</strong> <a href="https://adamspolishes.com/products/adam-s-great-white-microfiber-drying-towel">Adam&rsquo;s Great White Microfiber Drying Towel</a> &nbsp;&middot;&nbsp; <span class="price">$17.99 / 1-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">1&ndash;2 towels</span></li>
+  </ul>
+</div>
+
+<!-- ===================== EXHAUST ===================== -->
+<h2 class="dark">&#11035; EXHAUST TIP TOWELS</h2>
+
+<div class="section">
+  <h3>11. Exhaust Tip Cleaning &mdash; Step 16 (P21S Polishing Soap) <span class="badge">EXHAUST</span></h3>
+  <p><strong>Use:</strong> Apply P21S Polishing Soap with circular motions on each exhaust tip to cut carbon soot and oxidation. These will go black &mdash; completely separate from all other towels.</p>
+  <ul>
+    <li><strong>Product:</strong> <a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm</a> &nbsp;&middot;&nbsp; <span class="price">$17.00 / 10-pack</span></li>
+    <li><strong>Qty:</strong> <span class="qty">2&ndash;4 towels</span> &nbsp;&middot;&nbsp; Color code: <strong>Dark / Black</strong></li>
+  </ul>
+</div>
+
+<!-- ===================== SUMMARY TABLE ===================== -->
+<h2 class="black">&#128203; COMPLETE INVENTORY SUMMARY</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Towel Type</th>
+      <th>Recommended Product</th>
+      <th>Pack Size</th>
+      <th>Price</th>
+      <th>Qty Needed</th>
+      <th>Label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Bug Removal</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo; 350gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$15.00</td>
+      <td>4&ndash;6</td>
+      <td><span class="badge">BUGS</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Tar Removal</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo; 350gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$15.00</td>
+      <td>4&ndash;6</td>
+      <td><span class="badge">TAR ONLY</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Wheel / Overflow</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-utility-350-microfiber-cleaning-towel-350-gsm-16x16-200-case">Autofiber Utility 350 &mdash; 16&rdquo;x16&rdquo; 350gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$15.00</td>
+      <td>4&ndash;6</td>
+      <td><span class="badge">WHEELS</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Door Jambs</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$17.00</td>
+      <td>4</td>
+      <td><span class="badge">JAMBS</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Reload &mdash; Spread</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-korean-quadrant-wipe-plush-microfiber-coating-leveling-towel-16-in-x-16-in-350-gsm-120-case">Autofiber Korean Quadrant Wipe &mdash; 16&rdquo;x16&rdquo; 350gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$60.00</td>
+      <td>6&ndash;8</td>
+      <td><span class="badge">RELOAD &ndash; SPREAD</span></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Reload &mdash; Buff Off</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$17.00</td>
+      <td>6&ndash;8</td>
+      <td><span class="badge">RELOAD &ndash; BUFF OFF</span></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>QD Final Pass</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$17.00</td>
+      <td>2&ndash;3</td>
+      <td><span class="badge">QD ONLY</span></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Exterior Glass</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-retail-packaging-no-streak-freak-microfiber-waffle-weave-glass-towel-16-in-x-16-in-400-gsm-24-3-packs">Autofiber No Streak Freak &mdash; 16&rdquo;x16&rdquo; 400gsm Waffle</a></td>
+      <td>3-pack</td>
+      <td class="price-cell">$15.00</td>
+      <td>4&ndash;6</td>
+      <td><span class="badge">GLASS &ndash; EXT</span></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Interior Glass</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/flip-gpt-glass-perfect-towel-8-5-in-x-8-5-in-1400-gsm-3-pack">Autofiber Flip GPT &mdash; 8.5&rdquo;x8.5&rdquo; 1000gsm</a></td>
+      <td>3-pack</td>
+      <td class="price-cell">$21.00</td>
+      <td>4&ndash;6</td>
+      <td><span class="badge">GLASS &ndash; INT</span></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Drying (Trim / Mirrors)</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-amphibian-drying-towel-1100gsm-20x30-30-case">Autofiber Amphibian &mdash; 20&rdquo;x30&rdquo; 1100gsm</a></td>
+      <td>1-pack</td>
+      <td class="price-cell">$20.00</td>
+      <td>1&ndash;2</td>
+      <td><span class="badge">DRY &ndash; TRIM ONLY</span></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Exhaust Tips</td>
+      <td><a href="https://www.autofiber.com/collections/towels/products/full-case-mr-everything-premium-paintwork-towel-12-in-x-12-in-390-gsm-320-case">Autofiber Mr. Everything Jr. &mdash; 12&rdquo;x12&rdquo; 390gsm</a></td>
+      <td>10-pack</td>
+      <td class="price-cell">$17.00</td>
+      <td>2&ndash;4</td>
+      <td><span class="badge">EXHAUST</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="pricing-note" style="margin-top:8px;">&#9432; Prices reflect individual retail pack pricing from autofiber.com as of May 2026. Prices subject to change. Case pricing available for bulk savings.</p>
+
+<div class="note" style="margin-top: 18px;">
+  <strong>Key reminders:</strong> Color-code every category &mdash; ION Green metallic on a ceramic-coated car means any cross-contamination is a potential paint damage event. The <strong>Mr. Everything Jr. 12&rdquo;x12&rdquo;</strong> ($17.00/10-pack) is your highest-use towel (Reload buff-off, QD pass, jambs, exhaust) &mdash; the most cost-effective pick on this list. The <strong>Korean Quadrant Wipe</strong> ($60.00/10-pack) is premium but worth it for Reload 2.0 spread &mdash; 4 clean coating-grade faces per towel. Start with 10-packs across all categories before committing to case quantities.
+</div>
+
+<p class="footer">G80 M3 Wash Plan v2.0 &nbsp;&middot;&nbsp; Products sourced from autofiber.com &amp; adamspolishes.com &nbsp;&middot;&nbsp; Pricing verified May 2026</p>
+
 </body>
 </html>
